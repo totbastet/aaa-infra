@@ -1,0 +1,25 @@
+version: '3.8'
+
+services:
+  server:
+    image: server:0.0.1
+    container_name: server
+    ports:
+      - "8080:8080"
+    networks:
+      - webnet
+
+
+  grafana:
+    image: grafana/grafana:9.4.2
+    container_name: grafana
+    ports:
+      - "3000:3000"
+    networks:
+      - webnet
+    depends_on:
+      - server
+
+networks:
+  webnet:
+    driver: bridge
